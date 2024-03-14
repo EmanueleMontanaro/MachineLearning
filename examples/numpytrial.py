@@ -1,4 +1,5 @@
 import numpy
+import matplotlib.pyplot as plt
 
 print('Creating arrays and using main properties')
 x = numpy.array([1,2,3])
@@ -81,3 +82,43 @@ y=x[0:3]
 y[:] = 3
 print(x)
 
+print('\nTesting a condition on all elements:')
+x = numpy.array([[10,3,4],[6,9,2],[0,1,20]])
+xMask = x > 5
+print(xMask)
+print(x[xMask])
+
+print('\nBroadcasting applies elementwise operations\n to arrays with different shapes')
+x = numpy.zeros((3,4))
+m = numpy.arange(4)
+print('Example: adding the same values to each row\n of a 2D array')
+print('x + m = ', x+m)
+
+print('\nConcatenating arrays horizzontally and vertically:')
+x = numpy.array([[1,2,3]])
+y = numpy.array([[4,5,6]])
+print(numpy.hstack([x,y]))
+print(numpy.vstack([x,y]))
+print('\nUsing concatenate and specifying the axis:')
+numpy.concatenate([x,y], axis = 1) #Equivalent to hstack
+
+print('\nExamples of numpy.linalg linear algebra functions:')
+x = numpy.arange(9).reshape(3,3)
+print(numpy.linalg.eig(x))
+
+print('\nUsing matplotlib:')
+x = numpy.linspace(0, 5, 1000)
+plt.plot(x, numpy.sin(x))
+plt.xlabel('X-Axis')
+plt.ylabel('Y-Axis')
+plt.show()
+
+print('\nVisualizing 2D data using scatter plots:')
+D = numpy.random.random((2, 100))
+plt.scatter(D[0], D[1])
+plt.show()
+
+print('\nVisualizing data distributions through histograms:')
+D = numpy.random.normal(size=1000)
+plt.hist(D, bins = 20, density = True, ec = 'black', color = '#800000')
+plt.show()
