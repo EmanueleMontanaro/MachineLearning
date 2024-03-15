@@ -113,6 +113,12 @@ plt.xlabel('X-Axis')
 plt.ylabel('Y-Axis')
 plt.show()
 
+print('\nSpecifying different attributes:')
+x = numpy.linspace(0, 5, 20)
+plt.plot(x, numpy.sin(x), color='r', linestyle='--')
+plt.plot(x, numpy.sin(x), 'bo', markersize = 5)
+plt.show()
+
 print('\nVisualizing 2D data using scatter plots:')
 D = numpy.random.random((2, 100))
 plt.scatter(D[0], D[1])
@@ -122,3 +128,4 @@ print('\nVisualizing data distributions through histograms:')
 D = numpy.random.normal(size=1000)
 plt.hist(D, bins = 20, density = True, ec = 'black', color = '#800000')
 plt.show()
+
