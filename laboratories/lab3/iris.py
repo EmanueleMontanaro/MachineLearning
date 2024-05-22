@@ -1,5 +1,9 @@
 import numpy
 import matplotlib.pyplot as plt
+import pca
+import lda
+import commonResources
+import classification
 
 def conv(string):
     if 'Iris-setosa' in string:
@@ -69,58 +73,8 @@ def graphScatter(P,D,L):
             #plt.savefig('scatter_%d%d.pdf' % index1 % index2)
         plt.show()
 
-def computeMu(D): #Dataset mean
-    return D.mean(1)
-
-def vcol(x): #Function to reshape a 1-D vector as a column vector
-    return x.reshape((x.size,1))
-
-def vrow(x): #Function to reshape a 1-D vector as a row vector
-    return x.reshape((1,x.size))
-
-def computeN(D): #N is the number of samples, can be obtained as follows
-    return float(D.shape[1])
-
-def computeDC(D,mu): #DC is the Dataset Centered matrix, meaning the whole dataset matrix - the dataset mean
-    return (D-vcol(mu))
-
-def computeC(DC,N): #C is the covariance matrix
-    return (DC @ DC.T)/N
-
-def computeEig(C): #s are eigenvalues, sorted from highest to lowest, U columns are eigenvectors
-    s, U = numpy.linalg.eigh(C)
-    return s, U
-
-def computeEigSVD(C): #same as above but eigenvalues are from lowest to highest, U columns are already inverted
-    U, s, Vh = numpy.linalg.svd(C)
-    return U, s, Vh
-
-def computeP(U,m):
-    return U[:, 0:m]
-
-def computePCA():
+if __name__ =='__main__':
     D = loadD()
     L = loadL()
-    mu = vcol(computeMu(D))
-    N = computeN(D)
-    DC = computeDC(D,mu)
-    C = computeC(DC,N)
-    U, s, Vh = computeEigSVD(C)
-    P = computeP(U,4)
-    graphScatter(P,D,L)
-
-computePCA()
-        
-
-
-
-    
-
-
-
-
-
-
-
-
-
+    classification.runClassifcation(D,L)
+    plt.show()
